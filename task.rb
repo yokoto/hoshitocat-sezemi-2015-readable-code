@@ -11,6 +11,7 @@ while filename = STDIN.gets
     break
   end
 
+  # recipe-dataのファイルを受け取る
   file = File.new(filename)
 
   recipes = []
