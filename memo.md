@@ -32,7 +32,8 @@ while filename = STDIN.gets
 
   print "IDを入力して下さい(終了したいときは\"exit\"と入力) > "
   while recipe_id = STDIN.gets
-    puts "指定したID > #{recipe_id}"
+    recipe_id = recipe_id.to_i
+    puts "指定したID > #{recipe_id}" if recipe_id.to_i > 0
     break
   end
 
@@ -41,9 +42,14 @@ while filename = STDIN.gets
   recipes = []
   file.each_line { |line| recipes << line }
 
-  puts recipes[recipe_id].presence
-  recipes.each_with_index do |recipe, id| 
-    puts "#{id + 1}: #{recipe}"
+  if recipe_id > 0
+    recipe = recipes[recipe_id - 1]
+    recipe.nil? ? (puts "nothing") : (puts "#{recipe_id}: #{recipe}")
+    break
+  else
+    recipes.each_with_index do |recipe, id| 
+      puts "#{id + 1}: #{recipe}"
+    end
   end
 
   break
@@ -51,4 +57,4 @@ end
 ```
 
 ### リーダブルな理由
-WIP
+全然リーダブルじゃない気がしてきた…。
